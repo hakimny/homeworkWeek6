@@ -28,28 +28,39 @@ object MinTemperatures {
     val sc = new SparkContext(conf)
     
     // Read each line of input data
-    val lines = sc.textFile("../1800.csv")
+    val lines = sc.textFile("../ml-100k/1800.csv")
     
     // Convert to (stationID, entryType, temperature) tuples
     val parsedLines = lines.map(parseLine)
     
     // Filter out all but TMIN entries
     val minTemps = parsedLines.filter(x => x._2 == "TMIN")
+    val maxTemps = parsedLines.filter(x => x._2 == "TMAX")
     
     // Convert to (stationID, temperature)
     val stationTemps = minTemps.map(x => (x._1, x._3.toFloat))
-    
+    val maxStationTemps = maxTemps.map(x => (x._1, x._3.toFloat))
+   
     // Reduce by stationID retaining the minimum temperature found
     val minTempsByStation = stationTemps.reduceByKey( (x,y) => min(x,y))
-    
+    val maxTempsByStation = maxStationTemps.reduceByKey( (x,y) => max(x,y))
+     
     // Collect, format, and print the results
-    val results = minTempsByStation.collect()
+    val minResults = minTempsByStation.collect()
+    val maxResults = maxTempsByStation.collect() 
     
-    for (result <- results.sorted) {
+    
+    for (result <- minResults.sorted) {
        val station = result._1
        val temp = result._2
        val formattedTemp = f"$temp%.2f F"
        println(s"$station minimum temperature: $formattedTemp") 
+    }
+    for (result <- maxResults.sorted) {
+       val station = result._1
+       val temp = result._2
+       val formattedTemp = f"$temp%.2f F"
+       println(s"$station maximum temperature: $formattedTemp") 
     }
       
   }
