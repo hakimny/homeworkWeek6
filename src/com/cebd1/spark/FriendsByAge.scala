@@ -73,13 +73,20 @@ object FriendsByAge {
     resultsByName.sorted.foreach(println)
     
     //Group by age category (30, 40, 50, ..) and average friends of each category
+
+    val grouped = averagesByAge.map(x => (x._1, x._2, {
+        if (x._1 <= 20) {20} 
+        else if (x._1 <= 30) {30} 
+        else if (x._1 <= 40) {40} 
+        else if (x._1 <= 50) {50} 
+        else if (x._1 <= 60) {60} 
+        else if (x._1 <= 70) {70}
+      }
+    ))
+    val newGrouped = grouped.map(x => (x._3,x._2))
     
-//    val grouped = averagesByAge.map(
-//        case _._
-//    ) 
-    
-      
-   
+    val grouped2 = newGrouped.reduceByKey( (x,y) => (x + y)).collect()
+    grouped2.foreach(println)
   }
     
 }
