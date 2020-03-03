@@ -74,7 +74,12 @@ object FriendsByAge {
     
     //Group by age category (30, 40, 50, ..) and average friends of each category
     
+//    val grouped = averagesByAge.map(
+//        case _._
+//    ) 
     
+      
+   
   }
     
 }

@@ -64,7 +64,7 @@ object MinTemperatures {
      for (result <- minResults.sorted) {
          val station = result._1
          val temp = result._2
-         val formattedTemp = f"$temp%.2f C"
+         val formattedTemp = f"$temp%.2f F"
          println(s"$station minimum temperature: $formattedTemp") 
       }
     
@@ -76,7 +76,7 @@ object MinTemperatures {
       for (result <- maxResults.sorted) {
          val station = result._1
          val temp = result._2
-         val formattedTemp = f"$temp%.2f C"
+         val formattedTemp = f"$temp%.2f F"
          println(s"$station maximum temperature: $formattedTemp") 
       }
       
@@ -87,7 +87,7 @@ object MinTemperatures {
     for (result <- combinedResults.sorted) {
              val station = result._1
              val temp = result._2
-             val formattedTemp = f"$temp%.2f C"
+             val formattedTemp = f"$temp%.2f F"
              println(s"$station Diff between max & min temperature: $formattedTemp") 
           }
     
@@ -109,25 +109,25 @@ object MinTemperatures {
      for (result <- minDateResults.sorted) {
          val date = result._1
          val temp = result._2
-         val formattedTemp = f"$temp%.2f C"
+         val formattedTemp = f"$temp%.2f F"
          println(s"$date minimum temperature: $formattedTemp") 
       }
       for (result <- maxDateResults.sorted) {
          val date = result._1
          val temp = result._2
-         val formattedTemp = f"$temp%.2f C"
+         val formattedTemp = f"$temp%.2f F"
          println(s"$date maximum temperature: $formattedTemp") 
       }
       for (result <- combinedDateResults.sorted) {
          val date = result._1
          val temp = result._2
-         val formattedTemp = f"$temp%.2f C"
+         val formattedTemp = f"$temp%.2f F"
          println(s"$date combined temperature: $formattedTemp") 
       }
       val maxDateValue = combinedDateResults.maxBy(_._2)
       val date = maxDateValue._1
       val temp = maxDateValue._2
-      val tempFormatted = f"$temp%.2f C"
+      val tempFormatted = f"$temp%.2f F"
       print(s"Date = $date | Temp = $tempFormatted")
   
   }
